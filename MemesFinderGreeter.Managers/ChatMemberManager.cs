@@ -18,14 +18,18 @@ public class ChatMemberManager : IChatMemberManager
         _logger = logger;
     }
 
-    public async Task<IEnumerable<string>> GetChatAdminsUsernames(long chatId)
+    public async Task<IEnumerable<AdminInfo>> GetChatAdminsUsernames(long chatId)
     {
-        var result = new List<string>();
+        var result = new List<AdminInfo>();
         try
         {
             var chatAdmins = await _telegramBotClient.GetChatAdministratorsAsync(chatId);
-            result = chatAdmins.Select(admin => admin.User.Username ?? admin.User.FirstName)
-                                .ToList();
+            result = chatAdmins.Select(admin => new AdminInfo
+            {
+                Username = admin.User.Username,
+                ID = admin.User.Id,
+                FirstName = admin.User.FirstName
+            }).ToList();
         }
         catch (Exception ex)
         {
