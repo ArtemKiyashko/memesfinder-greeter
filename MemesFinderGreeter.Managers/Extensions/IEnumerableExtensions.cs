@@ -11,8 +11,8 @@ namespace MemesFinderGreeter.Managers.Extensions
 			if (strings.Count() == 1)
 				return formatter(strings.First());
 
-			return strings.Aggregate((f, s) => $"{formatter(f)} {formatter(s)}");
-		}
+			return strings.Select(s => $"{formatter(s)} ").Aggregate((f, s) => f + s);
+        }
 	}
 }
 
