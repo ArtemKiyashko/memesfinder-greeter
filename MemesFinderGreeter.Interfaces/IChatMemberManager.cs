@@ -7,6 +7,6 @@ namespace MemesFinderGreeter.Interfaces;
 public interface IChatMemberManager
 {
     public IEnumerable<GreetingMemberSettings> GetNewChatMember(Update tgUpdate, ChatOptions chatOptions);
-    public Task<IEnumerable<string>> GetChatAdminsUsernames(long chatId);
+    public Task<IEnumerable<AdminInfo>> GetChatAdminsUsernames(long chatId);
 }
 
