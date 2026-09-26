@@ -2,7 +2,7 @@
 using MemesFinderGreeter.Interfaces;
 using MemesFinderGreeter.Models.Options;
 using MemesFinderGreeter.Options;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Linq;
@@ -35,7 +35,7 @@ namespace MemesFinderGreeter
             _options = options.Value;
         }
 
-        [FunctionName("Greetings")]
+        [Function("Greetings")]
         public async Task Run([ServiceBusTrigger("allmessages", "greeter", Connection = "ServiceBusOptions")] Update tgIncomeMessage)
         {
             var currentChat = tgIncomeMessage.GetChat();
